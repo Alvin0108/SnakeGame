@@ -7,7 +7,7 @@ namespace SnakeGame
         static void Main(string[] args)
         {
             // start game
-            Console.WriteLine("Press key to continue...");
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
 
             // display this char on the console during the game
@@ -22,7 +22,7 @@ namespace SnakeGame
             int consoleHeightLimit = 24;
 
             // clear to color
-            Console.BackgroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Clear();
 
             // delay to slow down the character movement so you can see it
