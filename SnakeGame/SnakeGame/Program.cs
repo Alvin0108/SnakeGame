@@ -7,7 +7,7 @@ namespace SnakeGame
         static void Main(string[] args)
         {
             // start game
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("Press key to continue...");
             Console.ReadKey();
 
             // display this char on the console during the game
