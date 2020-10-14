@@ -2,6 +2,32 @@
 
 namespace SnakeGame
 {
+	//Position of Food
+	class Food
+	{
+		public int foodX;
+		public int foodY;
+		public Food(int FoodX, int FoodY)
+		{
+			foodX = FoodX;
+			foodY = FoodY;
+		}
+
+		public int FoodX
+		{
+			get { return foodX; }
+			set { foodX = value; }
+
+		}
+
+		public int FoodY
+		{
+			get { return foodY; }
+			set { foodY = value; }
+
+		}
+
+	}
     class Program
     {
         static void Main(string[] args)
@@ -30,6 +56,15 @@ namespace SnakeGame
 
             // whether to keep trails
             bool trail = false;
+
+			//Food spawn
+			Random rand = new Random();
+			Food posi;
+			posi = new Food(rand.Next(0, consoleWidthLimit),
+								rand.Next(6, consoleHeightLimit));
+			Console.SetCursorPosition(posi.foodX, posi.foodY);
+			Console.ForegroundColor = ConsoleColor.Cyan;
+			Console.Write("@");
 
             do // until escape
             {
