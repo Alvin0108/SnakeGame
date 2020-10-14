@@ -11,7 +11,7 @@ namespace SnakeGame
 			Console.ReadKey();
 
 			// display this char on the console during the game
-			char ch = '*';
+			string ch = "***";
 			bool gameLive = true;
 			ConsoleKeyInfo consoleKey; // holds whatever key is pressed
 
@@ -21,6 +21,9 @@ namespace SnakeGame
 			int consoleWidthLimit = 79;
 			int consoleHeightLimit = 24;
 
+			// Creating space
+			string space = "   ";
+
 			//Position of food
 			Random rand = new Random();
 			char food = '@';
@@ -28,6 +31,16 @@ namespace SnakeGame
 			foodx = rand.Next(2, consoleWidthLimit);
 			foody = rand.Next(2, consoleHeightLimit);
 
+			//Position of Obstacles
+			string obstacle1 = "||";
+			int ob1x = 0, ob1y = 0;
+			ob1x = rand.Next(0, consoleWidthLimit);
+			ob1y = rand.Next(0, consoleHeightLimit);
+
+			string obstacle2 = "||";
+			int ob2x = 0, ob2y = 0;
+			ob2x = rand.Next(0, consoleWidthLimit);
+			ob2y = rand.Next(0, consoleHeightLimit);
 
 			// clear to color
 			Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -85,19 +98,29 @@ namespace SnakeGame
 					}
 				}
 
+
+				Console.SetCursorPosition(ob1x, ob1y);
+				Console.Write(obstacle1);
+
+				Console.SetCursorPosition(ob2x, ob2y);
+				Console.Write(obstacle2);
+
 				//Loop the food
 				if (x == foodx && y == foody)
 				{
 					foodx = rand.Next(2, consoleWidthLimit);
 					foody = rand.Next(2, consoleHeightLimit);
+					space += " ";
+					ch += "*";
 				}
 				Console.SetCursorPosition(foodx, foody);
 				Console.Write(food);
 
+
 				// find the current position in the console grid & erase the character there if don't want to see the trail
 				Console.SetCursorPosition(x, y);
 				if (trail == false)
-					Console.Write(' ');
+					Console.Write(space);
 
 				// calculate the new position
 				// note x set to 0 because we use the whole width, but y set to 1 because we use top row for instructions
