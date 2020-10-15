@@ -20,6 +20,7 @@ namespace SnakeGame
 			int dx = 1, dy = 0;
 			int consoleWidthLimit = 79;
 			int consoleHeightLimit = 24;
+			int score = 0;
 
 			// Creating space
 			string space = "   ";
@@ -61,6 +62,7 @@ namespace SnakeGame
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.SetCursorPosition(0, 0);
 				Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
+				Console.WriteLine("Score: " + score);
 				Console.SetCursorPosition(x, y);
 				Console.ForegroundColor = cc;
 
@@ -108,13 +110,19 @@ namespace SnakeGame
 				//Loop the food
 				if (x == foodx && y == foody)
 				{
-					foodx = rand.Next(2, consoleWidthLimit);
-					foody = rand.Next(2, consoleHeightLimit);
+					if (x == foodx && y == foody)
+					{
+						score += 5;
+					}
+					foodx = rand.Next(2, consoleWidthLimit-1);
+					foody = rand.Next(2, consoleHeightLimit-1);
 					space += " ";
 					ch += "*";
 				}
 				Console.SetCursorPosition(foodx, foody);
 				Console.Write(food);
+
+
 
 
 				// find the current position in the console grid & erase the character there if don't want to see the trail
