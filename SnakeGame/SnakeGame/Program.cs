@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace SnakeGame
 {
@@ -114,8 +115,8 @@ namespace SnakeGame
 					{
 						score += 5;
 					}
-					foodx = rand.Next(2, consoleWidthLimit-1);
-					foody = rand.Next(2, consoleHeightLimit-1);
+					foodx = rand.Next(2, consoleWidthLimit - 1);
+					foody = rand.Next(2, consoleHeightLimit - 1);
 					space += " ";
 					ch += "*";
 				}
@@ -152,6 +153,15 @@ namespace SnakeGame
 				System.Threading.Thread.Sleep(delayInMillisecs);
 
 			} while (gameLive);
+
+			if (gameLive == false)
+			{
+				Console.WriteLine("Input your name : ");
+				string name = Console.ReadLine();
+				StreamWriter sw = File.AppendText("Score.txt");
+				sw.WriteLine(name + "\t" + score);
+				sw.Close();
+			}
 		}
 	}
 
