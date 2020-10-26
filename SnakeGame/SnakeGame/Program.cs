@@ -7,6 +7,17 @@ namespace SnakeGame
 	{
 		static void Main(string[] args)
 		{
+			// Difficulty and life system
+			string difficulty = " ";
+			int life = 5;
+
+			// You need to pick a difficulty
+			do
+			{
+				Console.WriteLine("Select your difficulty : ");
+				difficulty = Console.ReadLine();
+			} while (difficulty != "easy" && difficulty != "normal" && difficulty != "hard");
+
 			// start game
 			Console.WriteLine("Press any key to continue...");
 			Console.ReadKey();
@@ -25,6 +36,7 @@ namespace SnakeGame
 
 			// Creating space
 			string space = "   ";
+
 
 			//Position of food
 			Random rand = new Random();
@@ -64,6 +76,7 @@ namespace SnakeGame
 				Console.SetCursorPosition(0, 0);
 				Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
 				Console.WriteLine("Score: " + score);
+				Console.WriteLine("Life: " + life);
 				Console.SetCursorPosition(x, y);
 				Console.ForegroundColor = cc;
 
@@ -123,8 +136,49 @@ namespace SnakeGame
 				Console.SetCursorPosition(foodx, foody);
 				Console.Write(food);
 
+				// If hit obstacle, decrease life
+				if (x == ob1x && y == ob1y)
+				{
+					if (difficulty == "easy")
+					{
+						life--;
+					}
+					if (difficulty == "normal")
+					{
+						life -= 2;
+					}
+					if (difficulty == "hard")
+					{
+						life -= 4;
+					}
+					ob1x = rand.Next(0, consoleWidthLimit - 1);
+					ob1y = rand.Next(0, consoleHeightLimit - 1);
+				}
 
+				if (x == ob2x && y == ob2y)
+				{
+					if (difficulty == "easy")
+					{
+						life--;
+					}
+					if (difficulty == "normal")
+					{
+						life -= 2;
+					}
+					if (difficulty == "hard")
+					{
+						life -= 4;
+					}
+					ob2x = rand.Next(0, consoleWidthLimit - 1);
+					ob2y = rand.Next(0, consoleHeightLimit - 1);
+				}
 
+				// End the game if snake's life hit 0
+				if (life <= 0)
+				{
+					gameLive = false;
+					break;
+				}
 
 				// find the current position in the console grid & erase the character there if don't want to see the trail
 				Console.SetCursorPosition(x, y);
