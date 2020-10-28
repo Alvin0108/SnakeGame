@@ -182,10 +182,10 @@ namespace SnakeGame
 				}
 
 				//Set winning condition
-				if (score == 50)
+				if (score == 20)
 				{
 					Console.Clear();
-					Console.WriteLine("You win!!!");
+					Console.WriteLine("Congratulations， you win!!!");
 					Console.WriteLine("Press any key to end the game");
 					Console.ReadKey();
 					gameLive = false;
