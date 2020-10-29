@@ -75,7 +75,7 @@ namespace SnakeGame
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.SetCursorPosition(0, 0);
 				Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
-				Console.WriteLine("Obtain score 50 to win the game...");
+				Console.WriteLine("Obtain score 20 to win the game...");
 				Console.WriteLine("Score: " + score);
 				Console.WriteLine("Life: " + life);
 				Console.SetCursorPosition(x, y);
