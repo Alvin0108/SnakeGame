@@ -291,6 +291,17 @@ namespace SnakeGame
 				}
 				else if (selection == 3)
 				{
+					Console.Clear();
+					Console.WriteLine("~~~Help Page~~~");
+					Console.WriteLine("1. Movement of Snake");
+					Console.WriteLine("- Up/Down/Right/Left buttons respectively control the movement of the snake");
+					Console.WriteLine("\n2. Goal of the Game");
+					Console.WriteLine("- Obtain 20 score to win the game");
+					Console.WriteLine("\n3. Special Food");
+					Console.WriteLine("- Special food only appear when the player's life is under 2 or lower");
+					Console.WriteLine("\n~~~END~~~");
+					Console.WriteLine("Press any key to go back to main menu");
+					
 				}
 				else if (selection == 4)
 				{
