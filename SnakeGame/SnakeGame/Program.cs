@@ -298,9 +298,14 @@ namespace SnakeGame
 					Console.WriteLine("\n2. Goal of the Game");
 					Console.WriteLine("- Obtain 20 score to win the game");
 					Console.WriteLine("\n3. Special Food");
-					Console.WriteLine("- Special food only appear when the player's life is under 2 or lower");
+					Console.WriteLine("- Special food + only able to eat when the player's life is under 2 or lower");
+					Console.WriteLine("\n4. Obstacles");
+					Console.WriteLine("- Hit the || will decrease the snake life");
+					Console.WriteLine("\n5. Food");
+					Console.WriteLine("- Eat @ to earn score");
 					Console.WriteLine("\n~~~END~~~");
 					Console.WriteLine("Press any key to go back to main menu");
+					Console.ReadKey();
 					
 				}
 				else if (selection == 4)
