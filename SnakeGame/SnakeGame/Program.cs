@@ -81,7 +81,7 @@ namespace SnakeGame
 					ob2y = rand.Next(0, consoleHeightLimit);
 
 					// clear to color
-					Console.BackgroundColor = ConsoleColor.DarkGray;
+					Console.BackgroundColor = ConsoleColor.DarkCyan;
 					Console.Clear();
 
 					// delay to slow down the character movement so you can see it
