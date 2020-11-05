@@ -87,6 +87,12 @@ namespace SnakeGame
 					// delay to slow down the character movement so you can see it
 					int delayInMillisecs = 50;
 
+					// count steps for food each time the snake moves
+					int stepFood = 0;
+					// count steps for bounty food each time the snake moves
+					int stepBonusFood = 0;
+					int foodInterval = 100;
+
 					//whether to keep trails
 					bool trail = false;
 
@@ -99,7 +105,7 @@ namespace SnakeGame
 						Console.ForegroundColor = ConsoleColor.Black;
 						Console.SetCursorPosition(0, 0);
 						Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
-						Console.WriteLine("Obtain score 20 to win the game...");
+						Console.WriteLine("Obtain score 50 to win the game...");
 						Console.WriteLine("Score: " + score);
 						Console.WriteLine("Life: " + life);
 						Console.SetCursorPosition(x, y);
@@ -146,39 +152,52 @@ namespace SnakeGame
 						Console.SetCursorPosition(ob2x, ob2y);
 						Console.Write(obstacle2);
 
-						//Life food
-						if (life <= 2)
+
+						//Snake eat food
+						if ((x == foodx && y == foody) || stepFood > foodInterval)
 						{
+							//Increase score when snake eat the food
+							if (x == foodx && y == foody)
+							{
+								score += 5;
+								space += " ";
+								ch += "*";
+							}
+							//Remove the food
+							Console.SetCursorPosition(foodx, foody);
+							Console.Write(' ');
+							//New food
+							foodx = rand.Next(2, consoleWidthLimit - 1);
+							foody = rand.Next(2, consoleHeightLimit - 1);
+							stepFood = 0;
+						}
+						++stepFood;
+
+						Console.SetCursorPosition(foodx, foody);
+						Console.Write(food);
+
+
+						//Snake eat bonus food
+						if (x == s_foodx && y == s_foody || stepBonusFood > foodInterval)
+						{
+							//Increase score when snake eat the food
 							if (x == s_foodx && y == s_foody)
 							{
-
-								if (x == s_foodx && y == s_foody)
-								{
-									life += 1;
-
-								}
-								s_foodx = rand.Next(2, consoleWidthLimit - 1);
-								s_foody = rand.Next(2, consoleHeightLimit - 1);
+								score += 10;
 							}
+							//Remove the bonus food
+							Console.SetCursorPosition(s_foodx, s_foody);
+							Console.Write(' ');
+							//New bonus food
+							s_foodx = rand.Next(2, consoleWidthLimit - 1);
+							s_foody = rand.Next(2, consoleHeightLimit - 1);
+							stepBonusFood = 0;
 						}
+						++stepBonusFood;
 
 						Console.SetCursorPosition(s_foodx, s_foody);
 						Console.Write(s_food);
 
-						//Loop the food
-						if (x == foodx && y == foody)
-						{
-							if (x == foodx && y == foody)
-							{
-								score += 5;
-							}
-							foodx = rand.Next(2, consoleWidthLimit - 1);
-							foody = rand.Next(2, consoleHeightLimit - 1);
-							space += " ";
-							ch += "*";
-						}
-						Console.SetCursorPosition(foodx, foody);
-						Console.Write(food);
 
 						// If hit obstacle, decrease life
 						if (x == ob1x && y == ob1y)
@@ -225,7 +244,7 @@ namespace SnakeGame
 						}
 
 						//Set winning condition
-						if (score == 20)
+						if (score == 50)
 						{
 							Console.Clear();
 							Console.WriteLine("Congratulations You win!!!");
@@ -296,9 +315,9 @@ namespace SnakeGame
 					Console.WriteLine("1. Movement of Snake");
 					Console.WriteLine("- Up/Down/Right/Left buttons respectively control the movement of the snake");
 					Console.WriteLine("\n2. Goal of the Game");
-					Console.WriteLine("- Obtain 20 score to win the game");
+					Console.WriteLine("- Obtain 50 score to win the game");
 					Console.WriteLine("\n3. Special Food");
-					Console.WriteLine("- Special food + only able to eat when the player's life is under 2 or lower");
+					Console.WriteLine("- Special food + to earn bonus score");
 					Console.WriteLine("\n4. Obstacles");
 					Console.WriteLine("- Hit the obstacles(||) will decrease the player's life");
 					Console.WriteLine("\n5. Food");
@@ -306,7 +325,7 @@ namespace SnakeGame
 					Console.WriteLine("\n~~~END~~~");
 					Console.WriteLine("Press any key to go back to main menu");
 					Console.ReadKey();
-					
+
 				}
 				else if (selection == 4)
 				{
