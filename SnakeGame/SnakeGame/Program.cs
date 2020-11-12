@@ -320,12 +320,13 @@ namespace SnakeGame
 							{
 								if (y < tail)
 									y = consoleHeightLimit;
-								Console.SetCursorPosition(x, y);
-							}else if (Console.ForegroundColor == ConsoleColor.Cyan)
+								Console.SetCursorPosition(x, y-i);
+							}
+							else if (Console.ForegroundColor == ConsoleColor.Cyan)
 							{
 								if (y > consoleHeightLimit)
 									y = tail;
-								Console.SetCursorPosition(x, y);
+								Console.SetCursorPosition(x, y+i);
 							}
 
 							Console.Write(ch);
