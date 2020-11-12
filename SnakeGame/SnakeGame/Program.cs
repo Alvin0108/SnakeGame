@@ -5,6 +5,43 @@ namespace SnakeGame
 {
 	class Program
 	{
+		public static void scoreboard()
+		{
+			//View Score
+			Console.Clear();
+			Console.WriteLine("---Score shown below---");
+			using (StreamReader file = new StreamReader("Score.txt"))
+			{
+				string line;
+				while ((line = file.ReadLine()) != null)
+				{
+					Console.WriteLine(line);
+				}
+			}
+			Console.WriteLine("\n---End---");
+			Console.WriteLine("Press any key back to main menu");
+			Console.ReadKey();
+		}
+
+		public static void helppage()
+		{
+			Console.Clear();
+			Console.WriteLine("~~~Help Page~~~");
+			Console.WriteLine("1. Movement of Snake");
+			Console.WriteLine("- Up/Down/Right/Left buttons respectively control the movement of the snake");
+			Console.WriteLine("\n2. Goal of the Game");
+			Console.WriteLine("- Obtain at least 20 score to win the game");
+			Console.WriteLine("\n3. Special Food");
+			Console.WriteLine("- Special food + to earn bonus score");
+			Console.WriteLine("\n4. Obstacles");
+			Console.WriteLine("- Hit the obstacles(||) will decrease the player's life");
+			Console.WriteLine("\n5. Food");
+			Console.WriteLine("- Eat food(@) to earn score");
+			Console.WriteLine("\n~~~END~~~");
+			Console.WriteLine("Press any key to go back to main menu");
+			Console.ReadKey();
+		}
+
 		static void Main(string[] args)
 		{
 			int selection;
@@ -41,9 +78,10 @@ namespace SnakeGame
 					Console.ReadKey();
 
 					// display this char on the console during the game
-					string ch = "***";
+					char ch = '*';
 					bool gameLive = true;
 					ConsoleKeyInfo consoleKey; // holds whatever key is pressed
+					int tail = 3;
 
 					// location info & display
 					int x = 0, y = 2; // y is 2 to allow the top row for directions & space
@@ -105,7 +143,7 @@ namespace SnakeGame
 						Console.ForegroundColor = ConsoleColor.Black;
 						Console.SetCursorPosition(0, 0);
 						Console.WriteLine("Arrows move up/down/right/left. Press 'esc' quit.");
-						Console.WriteLine("Obtain score 50 to win the game...");
+						Console.WriteLine("Obtain score at least 20 to win the game...");
 						Console.WriteLine("Score: " + score);
 						Console.WriteLine("Life: " + life);
 						Console.SetCursorPosition(x, y);
@@ -161,7 +199,7 @@ namespace SnakeGame
 							{
 								score += 5;
 								space += " ";
-								ch += "*";
+								tail++;
 							}
 							//Remove the food
 							Console.SetCursorPosition(foodx, foody);
@@ -184,6 +222,7 @@ namespace SnakeGame
 							if (x == s_foodx && y == s_foody)
 							{
 								score += 10;
+								Console.Beep();
 							}
 							//Remove the bonus food
 							Console.SetCursorPosition(s_foodx, s_foody);
@@ -244,7 +283,7 @@ namespace SnakeGame
 						}
 
 						//Set winning condition
-						if (score == 50)
+						if (score >= 50)
 						{
 							Console.Clear();
 							Console.WriteLine("Congratulations You win!!!");
@@ -275,8 +314,23 @@ namespace SnakeGame
 
 						// write the character in the new position
 						Console.SetCursorPosition(x, y);
-						Console.Write(ch);
+						for (int i = 0; i < tail; i++)
+						{
+							if (Console.ForegroundColor == ConsoleColor.Red)
+							{
+								if (y < tail)
+									y = consoleHeightLimit;
+								Console.SetCursorPosition(x, y);
+							}
+							else if (Console.ForegroundColor == ConsoleColor.Cyan)
+							{
+								if (y > consoleHeightLimit)
+									y = tail;
+								Console.SetCursorPosition(x, y);
+							}
 
+							Console.Write(ch);
+						}
 						// pause to allow eyeballs to keep up
 						System.Threading.Thread.Sleep(delayInMillisecs);
 
@@ -293,38 +347,11 @@ namespace SnakeGame
 				}
 				else if (selection == 2)
 				{
-					//View Score
-					Console.Clear();
-					Console.WriteLine("---Score shown below---");
-					using (StreamReader file = new StreamReader("Score.txt"))
-					{
-						string line;
-						while ((line = file.ReadLine()) != null)
-						{
-							Console.WriteLine(line);
-						}
-					}
-					Console.WriteLine("\n---End---");
-					Console.WriteLine("Press any key back to main menu");
-					Console.ReadKey();
+					scoreboard();
 				}
 				else if (selection == 3)
 				{
-					Console.Clear();
-					Console.WriteLine("~~~Help Page~~~");
-					Console.WriteLine("1. Movement of Snake");
-					Console.WriteLine("- Up/Down/Right/Left buttons respectively control the movement of the snake");
-					Console.WriteLine("\n2. Goal of the Game");
-					Console.WriteLine("- Obtain 50 score to win the game");
-					Console.WriteLine("\n3. Special Food");
-					Console.WriteLine("- Special food + to earn bonus score");
-					Console.WriteLine("\n4. Obstacles");
-					Console.WriteLine("- Hit the obstacles(||) will decrease the player's life");
-					Console.WriteLine("\n5. Food");
-					Console.WriteLine("- Eat food(@) to earn score");
-					Console.WriteLine("\n~~~END~~~");
-					Console.WriteLine("Press any key to go back to main menu");
-					Console.ReadKey();
+					helppage();
 
 				}
 				else if (selection == 4)
