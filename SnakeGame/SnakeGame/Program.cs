@@ -283,7 +283,7 @@ namespace SnakeGame
 						}
 
 						//Set winning condition
-						if (score >= 50)
+						if (score >= 20)
 						{
 							Console.Clear();
 							Console.WriteLine("Congratulations You win!!!");
@@ -321,8 +321,7 @@ namespace SnakeGame
 								if (y < tail)
 									y = consoleHeightLimit;
 								Console.SetCursorPosition(x, y);
-							}
-							else if (Console.ForegroundColor == ConsoleColor.Cyan)
+							}else if (Console.ForegroundColor == ConsoleColor.Cyan)
 							{
 								if (y > consoleHeightLimit)
 									y = tail;
